@@ -1,33 +1,44 @@
-type Book {
+scalar DateTime
+
+type Libro {
     id: ID!
-    title: String
-    author: Author
-    category: Category
+    titulo: String
+    autorId: ID
+    categoriaId: ID
+    disponible: Boolean
 }
 
-type Author {
+type Autor {
     id: ID!
-    name: String
-    books: [Book]
+    nombre: String
+    biografia: String
 }
 
-type Category {
+type Categoria {
     id: ID!
-    name: String
-    books: [Book]
+    nombre: String
+    descripcion: String
+}
+
+type Reserva {
+    id: ID!
+    libroId: ID
+    usuarioId: ID
+    fechaReserva: DateTime
+    fechaDevolucion: DateTime
+}
+
+type Usuario {
+    id: ID!
+    nombre: String
+    email: String
+    esAdmin: Boolean
 }
 
 type Query {
-    allBooks: [Book]
-    bookById(id: ID!): Book
-    allAuthors: [Author]
-    authorById(id: ID!): Author
-    allCategories: [Category]
-    categoryById(id: ID!): Category
+    buscarLibros(titulo: String, autorId: ID, categoriaId: ID): [Libro]
+    obtenerAutor(id: ID!): Autor
+    obtenerCategoria(id: ID!): Categoria
+    obtenerReservas(usuarioId: ID!): [Reserva]
 }
 
-type Mutation {
-    createBook(title: String, authorId: ID!, categoryId: ID!): Book
-    updateBook(id: ID!, title: String, authorId: ID, categoryId: ID): Book
-    deleteBook(id: ID!): Boolean
-}
