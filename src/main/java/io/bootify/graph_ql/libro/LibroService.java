@@ -6,6 +6,7 @@ public interface LibroService {
     Libro crearLibro(String titulo, Long autorId, Long categoriaId);
     Libro actualizarLibro(Long id, Libro libro);
     void eliminarLibro(Long id);
-    Libro obtenerLibro(Long id);
+    Libro obtenerLibroID(Long id);
+    List<Libro> obtenerLibroPorTitulo(String titulo);
     List<Libro> obtenerTodosLosLibros();
 }

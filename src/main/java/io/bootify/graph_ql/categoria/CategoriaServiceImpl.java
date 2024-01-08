@@ -4,6 +4,8 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoriaServiceImpl implements CategoriaService{
 
@@ -15,7 +17,8 @@ public class CategoriaServiceImpl implements CategoriaService{
 
     @Override
     public Categoria crearCategoria(String nombre) {
-        return null;
+        Categoria categoria = new Categoria(nombre);
+        return categoriaRepository.save(categoria);
     }
 
     @Override
@@ -29,13 +32,8 @@ public class CategoriaServiceImpl implements CategoriaService{
     }
 
     @Override
-    public Categoria obtenerCategoria(Long id) {
-        return null;
-    }
-
-    @Override
-    public Iterable<Categoria> obtenerTodasLasCategorias() {
-        return null;
+    public List<Categoria> obtenerTodasLasCategorias() {
+        return categoriaRepository.findAll();
     }
 
     public Categoria buscarCategoriaPorId(Long id) {

@@ -1,7 +1,9 @@
 package io.bootify.graph_ql.libro;
 
+import io.bootify.graph_ql.autor.Autor;
 import io.bootify.graph_ql.autor.AutorRepository;
 import io.bootify.graph_ql.autor.AutorService;
+import io.bootify.graph_ql.categoria.Categoria;
 import io.bootify.graph_ql.categoria.CategoriaService;
 import io.bootify.graph_ql.categoria.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +13,26 @@ import java.util.List;
 @Service
 public class LibroServiceImpl implements LibroService {
     private final LibroRepository libroRepository;
-    private final AutorService autorService;
-    private final CategoriaService categoriaService;
-
-    public LibroServiceImpl(LibroRepository libroRepository, AutorService autorService, CategoriaService categoriaService) {
+    private final AutorRepository autorRepository;
+    private final CategoriaRepository categoriaRepository;
+    @Autowired
+    public LibroServiceImpl(LibroRepository libroRepository, AutorRepository autorRepository, CategoriaRepository categoriaRepository) {
         this.libroRepository = libroRepository;
-        this.autorService = autorService;
-        this.categoriaService = categoriaService;
+        this.autorRepository = autorRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
     @Override
     public Libro crearLibro(String titulo, Long autorId, Long categoriaId) {
-        // Crear y configurar una nueva instancia de Libro
-        Libro libro = new Libro(titulo, autorService.buscarAutorPorId(autorId), categoriaService.buscarCategoriaPorId(categoriaId));
-        // Guardar el libro en la base de datos
+        Autor autor = autorRepository.findById(autorId).orElseThrow(/* excepción */);
+        Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(/* excepción */);
+
+        Libro libro = new Libro();
+        libro.setTitulo(titulo);
+        libro.setAutor(autor);
+        libro.setCategoria(categoria);
+        libro.setDisponible(true);
+
         return libroRepository.save(libro);
     }
 
@@ -41,9 +49,15 @@ public class LibroServiceImpl implements LibroService {
     }
 
     @Override
-    public Libro obtenerLibro(Long id) {
+    public Libro obtenerLibroID(Long id) {
         // Lógica para obtener un libro
         return libroRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Libro> obtenerLibroPorTitulo(String titulo) {
+        // Lógica para obtener un libro por su título
+        return libroRepository.findByTitulo(titulo);
     }
 
     @Override

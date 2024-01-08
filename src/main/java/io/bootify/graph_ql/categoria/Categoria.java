@@ -48,6 +48,13 @@ public class Categoria {
     @Column(nullable = false)
     private OffsetDateTime lastUpdated;
 
+    public Categoria(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Categoria() {
+    }
+
     public Long getId() {
         return id;
     }

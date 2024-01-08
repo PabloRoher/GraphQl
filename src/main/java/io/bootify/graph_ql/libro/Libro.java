@@ -44,16 +44,19 @@ public class Libro {
     @Column(nullable = false)
     private String titulo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "autor_id", nullable = false)
     private Autor autor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
     @OneToMany(mappedBy = "libro")
     private Set<Reserva> reservas;
+
+    @Column(nullable = false)
+    private Boolean disponible;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -67,6 +70,11 @@ public class Libro {
         this.titulo = titulo;
         this.autor = autor;
         this.categoria = categoria;
+        this.disponible = true;
+    }
+
+    public Libro() {
+
     }
 
     public Long getId() {
@@ -107,6 +115,14 @@ public class Libro {
 
     public void setReservas(final Set<Reserva> reservas) {
         this.reservas = reservas;
+    }
+
+    public Boolean getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
     }
 
     public OffsetDateTime getDateCreated() {

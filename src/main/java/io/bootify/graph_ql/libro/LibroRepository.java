@@ -10,24 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
-public interface LibroRepository extends JpaRepository<Libro, Long>, JpaSpecificationExecutor<Libro> {
+public interface LibroRepository extends JpaRepository<Libro, Long>{
+    List<Libro> findByTitulo(String titulo);
 
-    default List<Libro> buscarPorTituloAutorYCategoria(String titulo, Long autorId, Long categoriaId) {
-        return findAll((Specification<Libro>) (root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-
-            if (titulo != null && !titulo.isEmpty()) {
-                predicates.add(cb.like(cb.lower(root.get("titulo")), "%" + titulo.toLowerCase() + "%"));
-            }
-            if (autorId != null) {
-                predicates.add(cb.equal(root.get("autor").get("id"), autorId));
-            }
-            if (categoriaId != null) {
-                predicates.add(cb.equal(root.get("categoria").get("id"), categoriaId));
-            }
-
-            return cb.and(predicates.toArray(new Predicate[0]));
-        });
-    }
 }
 
