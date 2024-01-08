@@ -1,4 +1,3 @@
-scalar DateTime
 
 type Libro {
     id: ID!
@@ -24,8 +23,6 @@ type Reserva {
     id: ID!
     libroId: ID
     usuarioId: ID
-    fechaReserva: DateTime
-    fechaDevolucion: DateTime
 }
 
 type Usuario {
@@ -42,3 +39,16 @@ type Query {
     obtenerReservas(usuarioId: ID!): [Reserva]
 }
 
+type Mutation {
+    agregarLibro(titulo: String!, autorId: ID!, categoriaId: ID!): Libro
+    editarLibro(id: ID!, titulo: String, autorId: ID, categoriaId: ID, disponible: Boolean): Libro
+    eliminarLibro(id: ID!): Boolean
+    agregarAutor(nombre: String!, biografia: String): Autor
+    editarAutor(id: ID!, nombre: String, biografia: String): Autor
+    eliminarAutor(id: ID!): Boolean
+    agregarCategoria(nombre: String!, descripcion: String): Categoria
+    editarCategoria(id: ID!, nombre: String, descripcion: String): Categoria
+    eliminarCategoria(id: ID!): Boolean
+    hacerReserva(libroId: ID!, usuarioId: ID!): Reserva
+    cancelarReserva(id: ID!): Boolean
+}

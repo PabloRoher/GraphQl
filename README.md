@@ -50,6 +50,19 @@ environment variable when running the container.
 mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=io.bootify/graph-ql
 ```
 
+GRAPHQL 
+
+GraphiQL is available under `localhost:8080/graphiql`.
+```
+npm init --yes
+```
+Run the following command to install both of these dependencies and save them in your project's node_modules directory:
+```
+npm install apollo-server graphql
+```
+```
+npm install graphql-tools
+```
 ## Further readings
 
 * [Maven docs](https://maven.apache.org/guides/index.html)  
