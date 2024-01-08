@@ -1,4 +1,3 @@
-
 type Libro {
     id: ID!
     titulo: String
@@ -35,6 +34,7 @@ type Usuario {
 type Query {
     buscarLibros(titulo: String, autorId: ID, categoriaId: ID): [Libro]
     obtenerAutor(id: ID!): Autor
+    obtenerTodosAutores: [Autor]
     obtenerCategoria(id: ID!): Categoria
     obtenerReservas(usuarioId: ID!): [Reserva]
 }
@@ -43,7 +43,7 @@ type Mutation {
     agregarLibro(titulo: String!, autorId: ID!, categoriaId: ID!): Libro
     editarLibro(id: ID!, titulo: String, autorId: ID, categoriaId: ID, disponible: Boolean): Libro
     eliminarLibro(id: ID!): Boolean
-    agregarAutor(nombre: String!, biografia: String): Autor
+    agregarAutor(nombre: String!): Autor
     editarAutor(id: ID!, nombre: String, biografia: String): Autor
     eliminarAutor(id: ID!): Boolean
     agregarCategoria(nombre: String!, descripcion: String): Categoria

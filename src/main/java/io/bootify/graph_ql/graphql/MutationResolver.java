@@ -6,11 +6,12 @@ import io.bootify.graph_ql.autor.AutorService;
 import io.bootify.graph_ql.libro.Libro;
 import io.bootify.graph_ql.libro.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MutationResolver implements GraphQLMutationResolver {
-
+/*
     // Suponiendo que tienes servicios que manejan la lógica de negocio para cada entidad
     private LibroService libroService;
 
@@ -19,6 +20,7 @@ public class MutationResolver implements GraphQLMutationResolver {
     }
 
     // Mutación para agregar un libro
+
     public Libro agregarLibro(String titulo, Long autorId, Long categoriaId) {
         return libroService.crearLibro(titulo, autorId, categoriaId);
     }

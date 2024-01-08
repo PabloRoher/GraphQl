@@ -48,6 +48,14 @@ public class Autor {
     @Column(nullable = false)
     private OffsetDateTime lastUpdated;
 
+    public Autor(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Autor() {
+
+    }
+
     public Long getId() {
         return id;
     }

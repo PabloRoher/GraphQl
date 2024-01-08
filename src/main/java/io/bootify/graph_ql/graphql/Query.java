@@ -11,10 +11,11 @@ import io.bootify.graph_ql.reserva.Reserva;
 import io.bootify.graph_ql.reserva.ReservaRepository;
 import io.bootify.graph_ql.usuario.UsuarioRepository;
 import org.springframework.stereotype.Component;
-
+import org.springframework.graphql.data.method.annotation.QueryMapping;
+/*
 @Component
 public class Query implements GraphQLQueryResolver {
-
+/*
     private final LibroRepository libroRepository;
     private final AutorRepository autorRepository;
     private final CategoriaRepository categoriaRepository;
@@ -32,7 +33,7 @@ public class Query implements GraphQLQueryResolver {
     }
 
     // Métodos para las consultas GraphQL
-
+    @QueryMapping
     public Iterable<Libro> buscarLibros(String titulo, Long autorId, Long categoriaId) {
         return libroRepository.buscarPorTituloAutorYCategoria(titulo, autorId, categoriaId);
     }
@@ -50,4 +51,4 @@ public class Query implements GraphQLQueryResolver {
     }
 
 }
-
+*/

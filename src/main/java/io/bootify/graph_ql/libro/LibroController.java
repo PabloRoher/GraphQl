@@ -1,28 +1,33 @@
 package io.bootify.graph_ql.libro;
 
-import io.bootify.graph_ql.autor.AutorService;
-import io.bootify.graph_ql.categoria.CategoriaService;
+import net.bytebuddy.implementation.bind.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 @Controller
 public class LibroController {
 
     private final LibroService libroService;
-    private final AutorService autorService;
-    private final CategoriaService categoriaService;
 
-    public LibroController(LibroService libroService, AutorService autorService, CategoriaService categoriaService) {
+    private final LibroRepository libroRepository;
+
+    public LibroController(LibroService libroService, LibroRepository libroRepository) {
         this.libroService = libroService;
-        this.autorService = autorService;
-        this.categoriaService = categoriaService;
+        this.libroRepository = libroRepository;
+    }
+    @QueryMapping
+    public List<Libro> buscarLibros(String titulo, Long autorId, Long categoriaId) {
+        return libroRepository.buscarPorTituloAutorYCategoria(titulo, autorId, categoriaId);
+    }
+    @MutationMapping
+    public Libro agregarLibro(String titulo, Long autorId, Long categoriaId) {
+        return libroService.crearLibro(titulo, autorId, categoriaId);
     }
 
-    @QueryMapping
-    public Libro libroById(@Argument Long id) {
-        return libroService.obtenerLibro(id);
-    }
+
 
     //agregar más métodos
 }

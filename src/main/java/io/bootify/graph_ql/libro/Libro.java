@@ -44,10 +44,6 @@ public class Libro {
     @Column(nullable = false)
     private String titulo;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Disponible disponible;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id", nullable = false)
     private Autor autor;
@@ -67,6 +63,12 @@ public class Libro {
     @Column(nullable = false)
     private OffsetDateTime lastUpdated;
 
+    public Libro(String titulo, Autor autor, Categoria categoria) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.categoria = categoria;
+    }
+
     public Long getId() {
         return id;
     }
@@ -81,14 +83,6 @@ public class Libro {
 
     public void setTitulo(final String titulo) {
         this.titulo = titulo;
-    }
-
-    public Disponible getDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(final Disponible disponible) {
-        this.disponible = disponible;
     }
 
     public Autor getAutor() {

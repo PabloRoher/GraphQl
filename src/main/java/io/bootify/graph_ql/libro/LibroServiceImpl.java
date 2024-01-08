@@ -23,11 +23,7 @@ public class LibroServiceImpl implements LibroService {
     @Override
     public Libro crearLibro(String titulo, Long autorId, Long categoriaId) {
         // Crear y configurar una nueva instancia de Libro
-        Libro libro = new Libro();
-        libro.setTitulo(titulo);
-        libro.setAutor(autorService.buscarAutorPorId(autorId));
-        libro.setCategoria(categoriaService.buscarCategoriaPorId(categoriaId));
-
+        Libro libro = new Libro(titulo, autorService.buscarAutorPorId(autorId), categoriaService.buscarCategoriaPorId(categoriaId));
         // Guardar el libro en la base de datos
         return libroRepository.save(libro);
     }

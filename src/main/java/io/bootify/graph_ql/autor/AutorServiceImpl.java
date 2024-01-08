@@ -5,6 +5,8 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AutorServiceImpl implements AutorService{
     private final AutorRepository autorRepository;
@@ -22,8 +24,9 @@ public class AutorServiceImpl implements AutorService{
     }
 
     @Override
-    public Autor crearAutor(String nombre, String apellido) {
-        return null;
+    public Autor crearAutor(String nombre) {
+        Autor autor = new Autor(nombre);
+        return autorRepository.save(autor);
     }
 
     @Override
@@ -42,7 +45,8 @@ public class AutorServiceImpl implements AutorService{
     }
 
     @Override
-    public Iterable<Autor> obtenerTodosLosAutores() {
-        return null;
+    public List<Autor> obtenerTodosLosAutores() {
+        return autorRepository.findAll();
     }
+
 }
