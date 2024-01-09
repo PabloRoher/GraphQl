@@ -6,7 +6,6 @@ public interface AutorService {
     Autor crearAutor(String nombre);
     Autor editarAutor(Long id, String nombre);
     String eliminarAutor(Long id);
-    Autor obtenerAutor(Long id);
     List<Autor> obtenerTodosLosAutores();
     Autor buscarAutorPorId(Long id);
 }

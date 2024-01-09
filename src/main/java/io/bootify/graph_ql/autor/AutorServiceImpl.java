@@ -55,11 +55,6 @@ public class AutorServiceImpl implements AutorService{
     }
 
     @Override
-    public Autor obtenerAutor(Long id) {
-        return null;
-    }
-
-    @Override
     public List<Autor> obtenerTodosLosAutores() {
         return autorRepository.findAll();
     }

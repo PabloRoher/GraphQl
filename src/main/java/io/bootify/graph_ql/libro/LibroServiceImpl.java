@@ -78,13 +78,6 @@ public class LibroServiceImpl implements LibroService {
         // Lógica para obtener un libro por su título
         return libroRepository.findByTitulo(titulo);
     }
-
-    @Override
-    public List<Libro> obtenerTodosLosLibros() {
-        // Lógica para obtener todos los libros
-        return libroRepository.findAll();
-    }
-
     @Override
     public List<Libro> buscarTodosLibros() {
         // Lógica para buscar todos los libros
