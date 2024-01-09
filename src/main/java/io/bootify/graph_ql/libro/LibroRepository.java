@@ -13,5 +13,8 @@ import java.util.List;
 public interface LibroRepository extends JpaRepository<Libro, Long>{
     List<Libro> findByTitulo(String titulo);
 
+    boolean existsByAutorId(Long id);
+
+    boolean existsByCategoriaId(Long id);
 }
 

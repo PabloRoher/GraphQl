@@ -56,5 +56,21 @@ public class LibroController {
         return libroService.obtenerLibroID(id);
     }
 
+    @QueryMapping
+    public List<Libro> buscarTodosLibros() {
+        return libroService.buscarTodosLibros();
+    }
+
+    @MutationMapping
+    public Libro editarLibro(@Argument Long id, @Argument String titulo,@Argument Long autorId,@Argument Long categoriaId,@Argument Boolean disponible) {
+        return libroService.actualizarLibro(id, titulo, autorId, categoriaId, disponible);
+    }
+
+    @MutationMapping
+    public String eliminarLibro(@Argument Long id) {
+        libroService.eliminarLibro(id);
+        return "Libro eliminado correctamente";
+    }
+
 }
 

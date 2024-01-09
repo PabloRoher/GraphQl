@@ -27,4 +27,14 @@ public class CategoriaController {
         public List<Categoria> obtenerTodasCategorias() {
             return categoriaService.obtenerTodasLasCategorias();
         }
+
+        @MutationMapping
+        public Categoria editarCategoria(@Argument Long id, @Argument String nombre) {
+            return categoriaService.actualizarCategoria(id, nombre);
+        }
+
+        @MutationMapping
+        public String eliminarCategoria(@Argument Long id) {
+            return categoriaService.eliminarCategoria(id);
+        }
 }

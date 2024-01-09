@@ -6,6 +6,7 @@ import io.bootify.graph_ql.autor.AutorService;
 import io.bootify.graph_ql.categoria.Categoria;
 import io.bootify.graph_ql.categoria.CategoriaService;
 import io.bootify.graph_ql.categoria.CategoriaRepository;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,10 @@ public class LibroServiceImpl implements LibroService {
 
     @Override
     public Libro crearLibro(String titulo, Long autorId, Long categoriaId) {
-        Autor autor = autorRepository.findById(autorId).orElseThrow(/* excepción */);
-        Categoria categoria = categoriaRepository.findById(categoriaId).orElseThrow(/* excepción */);
+        Autor autor = autorRepository.findById(autorId)
+                .orElseThrow(() -> new RuntimeException("Autor no encontrado con el ID: " + autorId));
+        Categoria categoria = categoriaRepository.findById(categoriaId)
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con el ID: " + categoriaId));
 
         Libro libro = new Libro();
         libro.setTitulo(titulo);
@@ -36,11 +39,27 @@ public class LibroServiceImpl implements LibroService {
         return libroRepository.save(libro);
     }
 
+
     @Override
-    public Libro actualizarLibro(Long id, Libro libro) {
-        // Lógica para actualizar el libro
-        return libroRepository.save(libro);
+    public Libro actualizarLibro(Long id, String titulo, Long autorId, Long categoriaId, Boolean disponible) {
+        // Buscar el libro por ID para asegurarse de que existe
+        Libro libroExistente = libroRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Libro no encontrado con el ID: " + id)
+        );
+
+        // Actualizar los detalles del libro
+        libroExistente.setTitulo(titulo);
+        libroExistente.setDisponible(disponible);
+        libroExistente.setAutor(autorRepository.findById(autorId).orElseThrow(
+                () -> new ResourceNotFoundException("Autor no encontrado con el ID: " + autorId)
+        ));
+        libroExistente.setCategoria(categoriaRepository.findById(categoriaId).orElseThrow(
+                () -> new ResourceNotFoundException("Categoría no encontrada con el ID: " + categoriaId)
+        ));
+        // Guardar y retornar el libro actualizado
+        return libroRepository.save(libroExistente);
     }
+
 
     @Override
     public void eliminarLibro(Long id) {
@@ -63,6 +82,12 @@ public class LibroServiceImpl implements LibroService {
     @Override
     public List<Libro> obtenerTodosLosLibros() {
         // Lógica para obtener todos los libros
+        return libroRepository.findAll();
+    }
+
+    @Override
+    public List<Libro> buscarTodosLibros() {
+        // Lógica para buscar todos los libros
         return libroRepository.findAll();
     }
 }

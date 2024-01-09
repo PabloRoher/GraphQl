@@ -29,4 +29,14 @@ public class AutorControler {
     public List<Autor> obtenerTodosAutores() {
         return autorService.obtenerTodosLosAutores();
     }
+
+    @MutationMapping
+    public Autor editarAutor(@Argument Long id, @Argument String nombre) {
+        return autorService.editarAutor(id, nombre);
+    }
+
+    @MutationMapping
+    public String eliminarAutor(@Argument Long id) {
+        return autorService.eliminarAutor(id);
+    }
 }

@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface AutorService {
     Autor crearAutor(String nombre);
-    Autor actualizarAutor(Long id, Autor autor);
-    void eliminarAutor(Long id);
+    Autor editarAutor(Long id, String nombre);
+    String eliminarAutor(Long id);
     Autor obtenerAutor(Long id);
     List<Autor> obtenerTodosLosAutores();
     Autor buscarAutorPorId(Long id);

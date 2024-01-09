@@ -4,9 +4,10 @@ import java.util.List;
 
 public interface LibroService {
     Libro crearLibro(String titulo, Long autorId, Long categoriaId);
-    Libro actualizarLibro(Long id, Libro libro);
+    Libro actualizarLibro(Long id, String titulo, Long autorId, Long categoriaId, Boolean disponible);
     void eliminarLibro(Long id);
     Libro obtenerLibroID(Long id);
     List<Libro> obtenerLibroPorTitulo(String titulo);
     List<Libro> obtenerTodosLosLibros();
+    List<Libro> buscarTodosLibros();
 }
